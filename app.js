@@ -13,17 +13,18 @@ function execCrossDomainRequestIdFromUri(ff) {
                url: ff[index].uri,
                method: "GET",
                headers: { "Accept": "application/json; odata=verbose" },
+			   MyParameter:index,
                success:  function (data, textStatus, xhr) {
                    var jsonObject = JSON.parse(data.body);
                    var results = jsonObject.d; var item = 0; var i = 0;
                    console.log(results);
-                   arrayOfId.push(results.Id,ff[index].Name);
+                   arrayOfId.push(results.Id,ff[this.MyParameter].Name);
                   
                    console.log(arrayOfId);
 
 
                    if (arrayOfId.length == ff.length) {
-                       if (index == ff.length - 1) {
+                       if (this.MyParameter == ff.length - 1) {
                            console.log(arrayOfId);
                            getArraysOfIds.resolve(arrayOfId);
 
