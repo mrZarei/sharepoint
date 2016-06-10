@@ -13,24 +13,25 @@ function execCrossDomainRequestIdFromUri(ff) {
                url: ff[index].uri,
                method: "GET",
                headers: { "Accept": "application/json; odata=verbose" },
-               success:  function (data) {
-                   callback(data,index);
+               success:  function (data, textStatus, xhr) {
+                   var jsonObject = JSON.parse(data.body);
+                   var results = jsonObject.d; var item = 0; var i = 0;
+                   console.log(results);
+                   arrayOfId.push(results.Id,ff[index].Name);
+                  
+                   console.log(arrayOfId);
+
+
+                   if (arrayOfId.length == ff.length) {
+                       if (index == ff.length - 1) {
+                           console.log(arrayOfId);
+                           getArraysOfIds.resolve(arrayOfId);
+
+                       }
+                   }
                },
                error: errorHandlerIdFromUri
            }
        );
     }
-}
-function callback(data,index){
-	var jsonObject = JSON.parse(data.body);
-                   var results = jsonObject.d; var item = 0; var i = 0;
-                   console.log(results);
-                   arrayOfId.push(results.Id,ff[index].Name);                  
-                   console.log(arrayOfId);
-                   if (arrayOfId.length == ff.length) {
-                       if (index == ff.length - 1) {
-                           console.log(arrayOfId);
-                           getArraysOfIds.resolve(arrayOfId);
-                       }
-                   }
 }
