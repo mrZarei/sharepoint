@@ -39,19 +39,18 @@ function execCrossDomainRequestToRetreiveItemFromList(site, list, paramet) {
             THTable: paramet,
             method: "GET",
             headers: { "Accept": "application/json; odata=verbose" },
-            success: successHandleToRetreiveItems,
+            success: function(data){
+                console.log(this.MyParameter1);
+                console.log(data);
+                jsonObject = JSON.parse(data.body);
+                console.log(jsonObject.d)
+                var result = jsonObject.d.results;
+                console.log(result);
+            },
             error: errorHandleToRetreiveItems
         }
     );
 }
 
-function successHandleToRetreiveItems(data) {
-    console.log(data);
-    jsonObject = JSON.parse(data.body);
-    console.log(jsonObject.d)
-    var result = jsonObject.d.results;
-    console.log(result);
-
-}
 
 
