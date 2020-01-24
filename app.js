@@ -1,6 +1,7 @@
 function getIdFromUri(ff) {
     var scriptbase = hostweburl + "/_layouts/15/";
     // console.log(ff);
+	//some changes
     // Load the js files and continue to the successHandler
     $.getScript(scriptbase + "SP.RequestExecutor.js", function () { execCrossDomainRequestIdFromUri(ff); });
 }
